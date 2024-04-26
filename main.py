@@ -1,7 +1,7 @@
 def sort_key(dict):
     return dict["num"] 
-
-with open("books/frankenstein.txt") as f:
+book_name = input("Location of the book text? ")
+with open(f"books/{book_name}.txt") as f:
     file_contents = f.read()
 
 words = len(file_contents.split())
