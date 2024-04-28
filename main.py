@@ -1,32 +1,32 @@
-def sort_key(dict):
-    return dict["num"] 
+import glob
+import book_functions
 
-list_letters = []
-letters = {}
-book_name = input("Name of the book? ")
 
-try:
-    with open(f"books/{book_name}.txt") as f:
-        file_contents = f.read()
-except FileNotFoundError:
-    print(f"'{book_name}' not found in directory. \nExiting program... ")
-    exit()
+while True:
+    count = 0
+    book_name = input("-------------------Options------------------- \nType the name of the book you're looking for, \nType 'Books' for a list of available books, \nType '.' to cancel program \n")
+    if book_name.lower() == "books":
+        # pulls all txt files in books folder 
+        files = glob.glob('books/*.txt')
+        print(f"There are {len(files)} books in the library.")
+        for file in files:
+            count += 1
+            print(f"{count}. {file[6:-4:]}")
+    elif book_name == ".":
+        print("Exiting program... ")
+        exit()
+    else:
+        try:
+            with open(f"books/{book_name}.txt") as f:
+                file_contents = f.read()
+        except FileNotFoundError:
+            print(f"'{book_name}' not found in directory. \nExiting program... ")
+            exit()
 
-words = len(file_contents.split())
+# words = len(file_contents.split())
 
-for i in file_contents:
-    i = i.lower()
-    if i.isalpha():
-        if i not in letters:
-            letters[i] =  1
-        else:
-            letters[i] += 1
 
-for i in letters:
-    list_letters.append({"letter": i, "num": letters[i]})
 
-list_letters.sort(reverse=True, key=sort_key)
+# book_functions.return_letter_totals(file_contents)
 
-for i in list_letters:
-    print(f"The '{i["letter"]}' character was found {i["num"]} times")
-print("--- End report ---")
+
