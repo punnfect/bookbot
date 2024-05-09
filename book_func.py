@@ -1,8 +1,8 @@
 import re
 
 # used for return_letter_totals func
-def sort_key(dict):
-    return dict["num"]
+# def sort_key(dict):
+#     return dict["num"]
 
 # Prints out number of letters used in decending order
 def return_letter_totals(file_contents):
@@ -19,7 +19,7 @@ def return_letter_totals(file_contents):
     for i in letters:
         list_letters.append({"letter": i, "num": letters[i]})
 
-    list_letters.sort(reverse=True, key=sort_key)
+    list_letters.sort(reverse=True, key=lambda dict: dict["num"])
 
     for i in list_letters:
         print(f"The '{i["letter"]}' character was found {i["num"]} times")
